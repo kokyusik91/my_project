@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/unoffical_camping_search.css">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+              rel="stylesheet">
+        <link rel="shortcut icon" href="../static/logo.ico" type="image/x-icon">
+        <title>캠핑장 찾기</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo_container">
+                <a href="mainpage.html" class="head_A">
+                    <img class="fit-picture"
+                         src="../static/차박.png"
+                         alt="Grapefruit slice atop a pile of other slices">
+                </a>
+            </div>
+        </header>
+
+        <section>
+            <div class="search">
+                <div class="text-area">
+                    <h1>비공개 캠핑장 찾기</h1>
+                    <P>비공개 된 캠핑장 정보들 입니다.<br>
+                        탭에서 '도'를 선택해 주세요.
+                    </P>
+                    <div class="box"></div>
+
+                    <div class="select">
+                        <select name="" id="">
+                            <option value="서울">서울</option>
+                            <option value="경기도">경기도</option>
+                            <option value="충청도">충청도</option>
+                            <option value="전라도">전라도</option>
+                            <option value="경상도">경상도</option>
+                            <option value="강원도">강원도</option>
+                            <option value="제주도">제주도</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn" value="찾기">
+
+                </div>
+            </div>
+            <div class="map_search">
+                <div id="map" style="width:900px;height:750px;"></div>
+            </div>
+
+            <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8fda181e9222674d77998c855b95849c"></script>
+            <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                    mapOption = {
+                        center: new kakao.maps.LatLng(37.557150, 126.969328), // 지도의 중심좌표
+                        level: 6, // 지도의 확대 레벨
+                        mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+                    };
+
+                // 지도를 생성한다
+                var map = new kakao.maps.Map(mapContainer, mapOption);
+                var markerPosition = new kakao.maps.LatLng(37.557150, 126.969328);
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+
+                var iwContent = '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwPosition = new kakao.maps.LatLng(37.557150, 126.969328); //인포윈도우 표시 위치입니다
+
+                // 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    position: iwPosition,
+                    content: iwContent
+                });
+
+                infowindow.open(map, marker);
+            </script>
+        </section>
+    </body>
+</html>
